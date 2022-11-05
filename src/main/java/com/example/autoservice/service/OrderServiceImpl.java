@@ -2,10 +2,11 @@ package com.example.autoservice.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
-
-import com.example.autoservice.model.*;
+import com.example.autoservice.model.Order;
+import com.example.autoservice.model.Product;
+import com.example.autoservice.model.Status;
+import com.example.autoservice.model.Job;
 import com.example.autoservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 

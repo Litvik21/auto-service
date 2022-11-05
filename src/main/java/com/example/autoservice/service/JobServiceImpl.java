@@ -1,13 +1,10 @@
 package com.example.autoservice.service;
 
+import java.util.List;
 import com.example.autoservice.model.Job;
-import com.example.autoservice.model.Master;
 import com.example.autoservice.model.StatusPaid;
 import com.example.autoservice.repository.JobRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class JobServiceImpl implements JobService {

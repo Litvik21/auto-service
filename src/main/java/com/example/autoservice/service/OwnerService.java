@@ -1,10 +1,9 @@
 package com.example.autoservice.service;
 
+import java.util.List;
 import com.example.autoservice.model.Car;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Owner;
-
-import java.util.List;
 
 public interface OwnerService {
     Owner save(Owner owner);
