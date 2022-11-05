@@ -30,10 +30,11 @@ public class CarController {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Update car by id")
-    public CarResponseDto update(@PathVariable
-                                     @ApiParam(value = "id of car that you want to update")
-                                     Long id,
-                                 @RequestBody CarRequestDto carRequest) {
+    public CarResponseDto update(
+            @PathVariable @ApiParam(value = "id of car that you want to update")
+            Long id,
+            @RequestBody CarRequestDto carRequest) {
+
         Car car = mapper.toModel(carRequest);
         car.setId(id);
         return mapper.toDto(carService.update(car));
