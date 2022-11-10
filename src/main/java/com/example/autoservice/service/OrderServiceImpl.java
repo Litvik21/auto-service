@@ -3,6 +3,7 @@ package com.example.autoservice.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
 import com.example.autoservice.model.Task;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final TaskService taskService;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, TaskService taskService) {
         this.orderRepository = orderRepository;
+        this.taskService = taskService;
     }
 
     @Override
@@ -53,7 +56,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public BigDecimal getPrice(Long id) {
-        return getById(id).getTotalPrice();
+        Order order = getById(id);
+        checkTypeOfTaskOnDiagnostic(order);
+        updateTotalPrice(order);
+        return order.getTotalPrice();
+    }
+
+    private void checkTypeOfTaskOnDiagnostic(Order order) {
+        List<Task> tasks = order.getTasks();
+        Optional<Task> taskByTypeDiagnostic = taskService.findTaskByType(Task.TypeOfTask.DIAGNOSTICS);
+        if (tasks.size() == 1
+                && taskByTypeDiagnostic.isPresent()) {
+            tasks.get(0).setPrice(BigDecimal.valueOf(500));
+        } else if (tasks.size() > 1
+                && taskByTypeDiagnostic.isPresent()) {
+            taskByTypeDiagnostic.get().setPrice(BigDecimal.valueOf(0));
+        }
     }
 
     private void checkStatus(Order order) {

@@ -1,6 +1,8 @@
 package com.example.autoservice.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.autoservice.model.Task;
 import com.example.autoservice.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,10 @@ public class TaskServiceImpl implements TaskService {
     public Task getById(Long id) {
         return taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Can't find task with this id:" + id));
+    }
+
+    @Override
+    public Optional<Task> findTaskByType(Task.TypeOfTask type) {
+        return taskRepository.findByType(type);
     }
 }

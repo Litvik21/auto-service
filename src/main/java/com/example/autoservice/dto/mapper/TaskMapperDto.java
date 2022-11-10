@@ -20,6 +20,7 @@ public class TaskMapperDto {
     public TaskResponseDto toDto(Task task) {
         TaskResponseDto dto = new TaskResponseDto();
         dto.setId(task.getId());
+        dto.setType(task.getType());
         dto.setOrderId(task.getOrder().getId());
         dto.setMechanicId(task.getMechanic().getId());
         dto.setPrice(task.getPrice());
@@ -30,6 +31,7 @@ public class TaskMapperDto {
 
     public Task toModel(TaskRequestDto requestDto) {
         Task task = new Task();
+        task.setType(requestDto.getType());
         task.setOrder(orderService.getById(requestDto.getOrderId()));
         task.setMechanic(mechanicService.getById(requestDto.getMechanicId()));
         task.setPrice(requestDto.getPrice());

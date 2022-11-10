@@ -2,6 +2,7 @@ package com.example.autoservice.service;
 
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
+import com.example.autoservice.model.Task;
 import com.example.autoservice.repository.OrderRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,9 @@ import java.util.*;
 class OrderServiceImplTest {
     @InjectMocks
     private OrderServiceImpl orderService;
+
+    @Mock
+    TaskServiceImpl taskService;
 
     @Mock
     private OrderRepository orderRepository;
@@ -50,10 +54,29 @@ class OrderServiceImplTest {
     @Test
     void shouldReturnUpdatedTotalPrice() {
         Mockito.when(orderRepository.findById(1L)).thenReturn(Optional.ofNullable(order));
-        //Mockito.when(orderService.getById(1L)).thenReturn(order);
         Assertions.assertEquals(BigDecimal.valueOf(887), order.getTotalPrice());
         Order actual = orderService.addProduct(1L, product);
         Assertions.assertEquals(4, actual.getProducts().size());
         Assertions.assertEquals(BigDecimal.valueOf(1475.52), actual.getTotalPrice());
+    }
+
+    @Test
+    void shouldReturnTotalPriceAndDiagnosticIsFree() {
+        Task task = new Task();
+        task.setPrice(BigDecimal.valueOf(400));
+        task.setType(Task.TypeOfTask.OIL_CHANGE);
+        Task task1 = new Task();
+        task1.setPrice(BigDecimal.valueOf(500));
+        task1.setType(Task.TypeOfTask.DIAGNOSTICS);
+        Order order1 = new Order();
+        order1.setId(4L);
+        order1.setProducts(Collections.emptyList());
+        order1.setTasks(List.of(task, task1));
+
+        Mockito.when(taskService.findTaskByType(Task.TypeOfTask.DIAGNOSTICS)).thenReturn(Optional.of(task1));
+        Mockito.when(orderRepository.findById(4L)).thenReturn(Optional.of(order1));
+        BigDecimal actual = orderService.getPrice(order1.getId());
+        Assertions.assertEquals(BigDecimal.valueOf(384.0), actual);
+
     }
 }

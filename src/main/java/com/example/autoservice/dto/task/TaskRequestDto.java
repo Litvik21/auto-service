@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskRequestDto {
+    private Task.TypeOfTask type;
     private Long orderId;
     private Long mechanicId;
     private BigDecimal price;
