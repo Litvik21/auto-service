@@ -19,12 +19,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(Product product) {
-        Product productToUpdate = productRepository.getReferenceById(product.getId());
-        return productRepository.save(productToUpdate);
+        return productRepository.save(product);
     }
 
     @Override
-    public Product get(Long id) {
-        return productRepository.getReferenceById(id);
+    public Product getById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Can't find product by id:" + id));
     }
 }

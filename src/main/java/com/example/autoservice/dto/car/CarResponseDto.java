@@ -1,9 +1,14 @@
 package com.example.autoservice.dto.car;
 
-import com.example.autoservice.model.Owner;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarResponseDto {
     private Long id;
     private String brand;

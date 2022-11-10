@@ -1,8 +1,14 @@
 package com.example.autoservice.dto.car;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarRequestDto {
     private String brand;
     private String model;

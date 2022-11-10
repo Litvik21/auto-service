@@ -1,6 +1,5 @@
 package com.example.autoservice.service;
 
-import java.util.Optional;
 import com.example.autoservice.model.Car;
 import com.example.autoservice.repository.CarRepository;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car get(Long id) {
-        return carRepository.getReferenceById(id);
+    public Car getById(Long id) {
+        return carRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Can't find car by id:" + id));
     }
 
 
@@ -26,9 +26,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car update(Car car) {
-        Optional<Car> carToUpdate = carRepository.findById(car.getId());
-        carToUpdate.orElseThrow(() ->
-                new RuntimeException("Can't find car by this id: " + car.getId()));
-        return carRepository.save(carToUpdate.get());
+        return carRepository.save(car);
     }
 }

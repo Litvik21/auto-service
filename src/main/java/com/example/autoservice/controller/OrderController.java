@@ -6,7 +6,6 @@ import com.example.autoservice.dto.order.OrderResponseDto;
 import com.example.autoservice.dto.mapper.OrderMapper;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
-import com.example.autoservice.model.Status;
 import com.example.autoservice.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -64,10 +63,10 @@ public class OrderController {
             Long id,
             @RequestParam @ApiParam(value = "new status for order") String status) {
 
-        return mapper.toDto(orderService.updateStatus(id, Status.valueOf(status)));
+        return mapper.toDto(orderService.updateStatus(id, Order.Status.valueOf(status)));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/price/{id}")
     @ApiOperation(value = "Get total price order")
     public BigDecimal getTotalPrice(
             @PathVariable @ApiParam(value = "id of order that you want to get total price")

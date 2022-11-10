@@ -7,14 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Data;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Data
 @Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
     private String brand;
     private String model;
@@ -22,5 +28,5 @@ public class Car {
     private String number;
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private Owner owner;
+    private CarOwner owner;
 }

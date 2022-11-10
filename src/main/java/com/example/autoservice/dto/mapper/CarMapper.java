@@ -3,14 +3,14 @@ package com.example.autoservice.dto.mapper;
 import com.example.autoservice.dto.car.CarRequestDto;
 import com.example.autoservice.dto.car.CarResponseDto;
 import com.example.autoservice.model.Car;
-import com.example.autoservice.service.OwnerService;
+import com.example.autoservice.service.CarOwnerService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CarMapper {
-    private final OwnerService ownerService;
+    private final CarOwnerService ownerService;
 
-    public CarMapper(OwnerService ownerService) {
+    public CarMapper(CarOwnerService ownerService) {
         this.ownerService = ownerService;
     }
 
@@ -32,7 +32,7 @@ public class CarMapper {
         car.setModel(requestDto.getModel());
         car.setYear(requestDto.getYear());
         car.setNumber(requestDto.getNumber());
-        car.setOwner(ownerService.get(requestDto.getOwnerId()));
+        car.setOwner(ownerService.getById(requestDto.getOwnerId()));
 
         return car;
     }

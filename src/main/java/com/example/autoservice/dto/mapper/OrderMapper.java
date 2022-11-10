@@ -5,12 +5,11 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 import com.example.autoservice.dto.order.OrderRequestDto;
 import com.example.autoservice.dto.order.OrderResponseDto;
-import com.example.autoservice.model.Job;
+import com.example.autoservice.model.Task;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
-import com.example.autoservice.model.Status;
 import com.example.autoservice.service.CarService;
-import com.example.autoservice.service.JobService;
+import com.example.autoservice.service.TaskService;
 import com.example.autoservice.service.OrderService;
 import com.example.autoservice.service.ProductService;
 import org.springframework.stereotype.Component;
@@ -20,14 +19,14 @@ public class OrderMapper {
     private final OrderService orderService;
     private final CarService carService;
     private final ProductService productService;
-    private final JobService jobService;
+    private final TaskService taskService;
 
     public OrderMapper(OrderService orderService, CarService carService,
-                       ProductService productService, JobService jobService) {
+                       ProductService productService, TaskService taskService) {
         this.orderService = orderService;
         this.carService = carService;
         this.productService = productService;
-        this.jobService = jobService;
+        this.taskService = taskService;
     }
 
     public OrderResponseDto toDto(Order order) {
@@ -36,8 +35,8 @@ public class OrderMapper {
         dto.setCarId(order.getCar().getId());
         dto.setDescription(order.getDescription());
         dto.setDateReceived(order.getDateReceived());
-        dto.setJobIds(order.getJobs().stream()
-                .map(Job::getId)
+        dto.setTaskIds(order.getTasks().stream()
+                .map(Task::getId)
                 .collect(Collectors.toList()));
         dto.setProductsIds(order.getProducts().stream()
                 .map(Product::getId)
@@ -51,16 +50,16 @@ public class OrderMapper {
 
     public Order toModel(OrderRequestDto requestDto) {
         Order order = new Order();
-        order.setCar(carService.get(requestDto.getCarId()));
+        order.setCar(carService.getById(requestDto.getCarId()));
         order.setDescription(requestDto.getDescription());
         order.setDateReceived(LocalDate.now());
-        order.setJobs(requestDto.getJobIds().stream()
-                .map(jobService::get)
+        order.setTasks(requestDto.getTaskIds().stream()
+                .map(taskService::getById)
                 .toList());
         order.setProducts(requestDto.getProductsIds().stream()
-                .map(productService::get)
+                .map(productService::getById)
                 .toList());
-        order.setStatus(Status.RECEIVED);
+        order.setStatus(Order.Status.RECEIVED);
         order.setTotalPrice(BigDecimal.valueOf(0));
         order.setDateFinished(requestDto.getDateFinished());
 

@@ -5,7 +5,7 @@ import com.example.autoservice.model.Car;
 public interface CarService {
     Car save(Car car);
 
-    Car get(Long id);
+    Car getById(Long id);
 
     Car update(Car car);
 }

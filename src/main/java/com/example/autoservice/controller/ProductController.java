@@ -28,8 +28,8 @@ public class ProductController {
     @PostMapping
     @ApiOperation(value = "Save product to DB")
     public ProductResponseDto save(@RequestBody ProductRequestDto requestDto) {
-        Product product = mapper.toModel(requestDto);
-        return mapper.toDto(productService.save(product));
+        Product product = productService.save(mapper.toModel(requestDto));
+        return mapper.toDto(product);
     }
 
     @PutMapping("/{id}")

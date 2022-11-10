@@ -5,8 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
-import com.example.autoservice.model.Status;
-import com.example.autoservice.model.Job;
+import com.example.autoservice.model.Task;
 import com.example.autoservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +24,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
-        Order orderToUpdate = orderRepository.getReferenceById(order.getId());
-        return orderRepository.save(orderToUpdate);
+        return orderRepository.save(order);
     }
 
     @Override
     public Order addProduct(Long orderId, Product product) {
-        Order order = orderRepository.getReferenceById(orderId);
+        Order order = getById(orderId);
         List<Product> products = order.getProducts();
         products.add(product);
         order.setProducts(products);
@@ -40,27 +38,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateStatus(Long orderId, Status status) {
-        Order order = orderRepository.getReferenceById(orderId);
+    public Order updateStatus(Long orderId, Order.Status status) {
+        Order order = getById(orderId);
         order.setStatus(status);
         checkStatus(order);
         return orderRepository.save(order);
     }
 
     @Override
-    public Order get(Long id) {
-        return orderRepository.getReferenceById(id);
+    public Order getById(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Can't find order by id:" + id));
     }
 
     @Override
     public BigDecimal getPrice(Long id) {
-        Order order = orderRepository.getReferenceById(id);
-        return order.getTotalPrice();
+        return getById(id).getTotalPrice();
     }
 
     private void checkStatus(Order order) {
-        if (order.getStatus() == Status.SUCCESSFULLY_COMPLETED
-                || order.getStatus() == Status.NOT_SUCCESSFULLY_COMPLETED) {
+        if (order.getStatus() == Order.Status.SUCCESSFULLY_COMPLETED
+                || order.getStatus() == Order.Status.NOT_SUCCESSFULLY_COMPLETED) {
             order.setDateFinished(LocalDate.now());
         }
     }
@@ -70,15 +68,20 @@ public class OrderServiceImpl implements OrderService {
                 .map(Product::getPrice)
                 .mapToDouble(BigDecimal::doubleValue)
                 .sum();
-        double totalPriceJobs = order.getJobs().stream()
-                .map(Job::getPrice)
+        double totalPriceJobs = order.getTasks().stream()
+                .map(Task::getPrice)
                 .mapToDouble(BigDecimal::doubleValue)
                 .sum();
-        int countOfProducts = order.getProducts().size();
-        int countOfJobs = order.getJobs().size();
-        double totalPriceWithOutSale = totalPriceJobs + totalPriceProducts;
-        double sale = (totalPriceJobs + totalPriceProducts) * (countOfProducts + countOfJobs * 2);
-        order.setTotalPrice(BigDecimal.valueOf(totalPriceWithOutSale - sale));
+        order.setTotalPrice(getTotalPriceWithSale(order, totalPriceProducts, totalPriceJobs));
         orderRepository.save(order);
+    }
+
+    private BigDecimal getTotalPriceWithSale(Order order, double totalPriceProducts,
+                           double totalPriceJobs) {
+        int countOfProducts = order.getProducts().size();
+        int countOfJobs = order.getTasks().size();
+        double totalPriceWithOutSale = totalPriceJobs + totalPriceProducts;
+        double sale = (totalPriceJobs + totalPriceProducts) * (countOfProducts + countOfJobs * 2) / 100;
+        return BigDecimal.valueOf(totalPriceWithOutSale - sale);
     }
 }

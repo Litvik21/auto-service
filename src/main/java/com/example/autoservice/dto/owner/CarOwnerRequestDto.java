@@ -1,6 +1,6 @@
-package com.example.autoservice.dto.product;
+package com.example.autoservice.dto.owner;
 
-import java.math.BigDecimal;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRequestDto {
-    private String title;
-    private BigDecimal price;
+public class CarOwnerRequestDto {
+    private List<Long> carsId;
+    private List<Long> ordersId;
 }
