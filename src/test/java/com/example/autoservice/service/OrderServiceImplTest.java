@@ -52,12 +52,11 @@ class OrderServiceImplTest {
     }
 
     @Test
-    void shouldReturnUpdatedTotalPrice() {
+    void shouldAddProductToOrder() {
         Mockito.when(orderRepository.findById(1L)).thenReturn(Optional.ofNullable(order));
-        Assertions.assertEquals(BigDecimal.valueOf(887), order.getTotalPrice());
+        Assertions.assertEquals(3, order.getProducts().size());
         Order actual = orderService.addProduct(1L, product);
         Assertions.assertEquals(4, actual.getProducts().size());
-        Assertions.assertEquals(BigDecimal.valueOf(1475.52), actual.getTotalPrice());
     }
 
     @Test

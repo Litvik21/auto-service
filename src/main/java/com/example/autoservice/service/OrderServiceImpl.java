@@ -36,7 +36,6 @@ public class OrderServiceImpl implements OrderService {
         List<Product> products = order.getProducts();
         products.add(product);
         order.setProducts(products);
-        updateTotalPrice(order);
         return order;
     }
 
