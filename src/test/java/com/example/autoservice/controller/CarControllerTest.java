@@ -14,6 +14,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,29 +66,5 @@ class CarControllerTest {
                 .body("year", Matchers.equalTo("2018"))
                 .body("brand", Matchers.equalTo("audi"))
                 .body("model", Matchers.equalTo("a7"));
-
-
-//        MockMvcResponse response = RestAssuredMockMvc
-//                .given()
-//                .contentType(ContentType.JSON)
-//                .body(new CarRequestDto(car.getBrand(), car.getModel(),
-//                        car.getYear(), car.getNumber(), 0L))
-//                .post("/cars")
-//                .then()
-//                .statusCode(200)
-//                .extract().response();
-//
-//        CarResponseDto dto = objectMapper.readValue(
-//                response.getMvcResult().getResponse().getContentAsString(),
-//                new TypeReference<>() {
-//                }
-//        );
-//
-//        Assertions.assertEquals(dto.getId(), car.getId());
-//        Assertions.assertEquals(dto.getYear(), car.getYear());
-//        Assertions.assertEquals(dto.getBrand(), car.getBrand());
-//        Assertions.assertEquals(dto.getModel(), car.getModel());
-//        Assertions.assertEquals(dto.getNumber(), car.getNumber());
-
     }
 }

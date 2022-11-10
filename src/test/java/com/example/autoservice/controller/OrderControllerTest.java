@@ -1,8 +1,12 @@
 package com.example.autoservice.controller;
 
+import com.example.autoservice.dto.mapper.OrderMapper;
 import com.example.autoservice.dto.order.OrderRequestDto;
+import com.example.autoservice.dto.order.OrderResponseDto;
+import com.example.autoservice.dto.product.ProductRequestDto;
 import com.example.autoservice.model.Car;
 import com.example.autoservice.model.Order;
+import com.example.autoservice.model.Product;
 import com.example.autoservice.service.CarService;
 import com.example.autoservice.service.OrderService;
 import io.restassured.http.ContentType;
@@ -21,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -61,11 +66,6 @@ class OrderControllerTest {
                 .statusCode(200)
                 .body("id", Matchers.equalTo(3))
                 .body("description", Matchers.equalTo("oil change"));
-    }
-
-    @Test
-    void should() {
-
     }
 
     @Test

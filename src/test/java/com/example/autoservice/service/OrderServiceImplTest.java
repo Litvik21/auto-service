@@ -1,5 +1,8 @@
 package com.example.autoservice.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.*;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
 import com.example.autoservice.model.Task;
@@ -13,10 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.*;
-
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
     @InjectMocks
@@ -29,6 +28,7 @@ class OrderServiceImplTest {
     private OrderRepository orderRepository;
 
     private Order order;
+
     private Product product;
 
     private List<Product> products;
@@ -76,6 +76,21 @@ class OrderServiceImplTest {
         Mockito.when(orderRepository.findById(4L)).thenReturn(Optional.of(order1));
         BigDecimal actual = orderService.getPrice(order1.getId());
         Assertions.assertEquals(BigDecimal.valueOf(384.0), actual);
+    }
 
+    @Test
+    void shouldReturnTotalPriceAndDiagnosticIsNotFree() {
+        Task task = new Task();
+        task.setPrice(BigDecimal.valueOf(500));
+        task.setType(Task.TypeOfTask.DIAGNOSTICS);
+        Order order1 = new Order();
+        order1.setId(4L);
+        order1.setProducts(Collections.emptyList());
+        order1.setTasks(List.of(task));
+
+        Mockito.when(taskService.findTaskByType(Task.TypeOfTask.DIAGNOSTICS)).thenReturn(Optional.of(task));
+        Mockito.when(orderRepository.findById(4L)).thenReturn(Optional.of(order1));
+        BigDecimal actual = orderService.getPrice(order1.getId());
+        Assertions.assertEquals(BigDecimal.valueOf(490.0), actual);
     }
 }
