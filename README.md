@@ -6,6 +6,8 @@
 This app look like a simple visualisation of AutoService. 
 Where you can add car to service, add some jobs and products for fixing a car.
 Also, after all work master get salary and client gets total price with sale.
+NOTE: if owner of a car has only one task for mechanic, and it is diagnostic - owner will pay 500 s.o.
+But if the owner agrees to repair the car, diagnostic is free.
  
 ## 📋 Project structure
 **The project has an 3-Tier Architecture**
@@ -25,7 +27,8 @@ Also, after all work master get salary and client gets total price with sale.
 - MySQL
 - Tomcat
 - Swagger
-- Spring Web/Boot
+- Spring Web/Boot/MVC
+- DOCKER
 
 ## ⚡️Quickstart
 1. Fork this repository
