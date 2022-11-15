@@ -47,6 +47,7 @@ But if the owner agrees to repair the car, diagnostic is free.
 ```
 6. Create the necessary name of DB
 7. Run project
+8. this command "docker pull litvik/autoservice:latest" for using docker
 
 ## 👀 Example of parameters for db.properties
 ``` java
