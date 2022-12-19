@@ -7,12 +7,10 @@ import com.example.autoservice.model.Car;
 import com.example.autoservice.service.CarService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("cars")
@@ -43,5 +41,13 @@ public class CarController {
         Car car = mapper.toModel(carRequest);
         car.setId(id);
         return mapper.toDto(carService.update(car));
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get list of cars")
+    public List<CarResponseDto> getAll() {
+        return carService.getAll().stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }

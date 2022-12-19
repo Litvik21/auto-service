@@ -1,9 +1,11 @@
 package com.example.autoservice.service;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 import com.example.autoservice.model.Mechanic;
 import com.example.autoservice.model.Task;
 import com.example.autoservice.repository.MechanicRepository;
-import com.example.autoservice.repository.TaskRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class MechanicServiceImplTest {

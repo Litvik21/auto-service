@@ -47,4 +47,9 @@ public class TaskServiceImpl implements TaskService {
     public Optional<Task> findTaskByType(Task.TypeOfTask type) {
         return taskRepository.findByType(type);
     }
+
+    @Override
+    public List<Task> getAll() {
+        return taskRepository.findAll();
+    }
 }

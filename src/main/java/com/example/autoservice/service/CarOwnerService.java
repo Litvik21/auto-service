@@ -15,4 +15,6 @@ public interface CarOwnerService {
     List<Order> findAllOrdersById(Long id);
 
     List<Car> findAllCarsById(Long id);
+
+    List<CarOwner> getAll();
 }

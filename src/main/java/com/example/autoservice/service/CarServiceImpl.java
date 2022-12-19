@@ -4,6 +4,8 @@ import com.example.autoservice.model.Car;
 import com.example.autoservice.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
@@ -27,5 +29,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car update(Car car) {
         return carRepository.save(car);
+    }
+
+    @Override
+    public List<Car> getAll() {
+        return carRepository.findAll();
     }
 }

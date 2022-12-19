@@ -1,9 +1,10 @@
 package com.example.autoservice.controller;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 import com.example.autoservice.dto.mechanic.MechanicRequestDto;
-import com.example.autoservice.dto.owner.CarOwnerRequestDto;
 import com.example.autoservice.model.Car;
-import com.example.autoservice.model.CarOwner;
 import com.example.autoservice.model.Mechanic;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.service.MechanicService;
@@ -20,10 +21,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.hamcrest.Matchers;
-
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest

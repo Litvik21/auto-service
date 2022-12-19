@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mysqldb:
     image: 'mysql:8.0.31'
-    restart: on-failure
+    restart: unless-stopped
     env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=12Marvel21
@@ -13,6 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
+    restart: on-failure
     image: 'autoservice'
     build: .
     env_file: ./.env

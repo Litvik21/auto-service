@@ -1,13 +1,12 @@
 package com.example.autoservice.controller;
 
-import com.example.autoservice.dto.car.CarRequestDto;
+import java.util.Collections;
+import java.util.List;
 import com.example.autoservice.dto.owner.CarOwnerRequestDto;
 import com.example.autoservice.model.Car;
 import com.example.autoservice.model.CarOwner;
 import com.example.autoservice.model.Order;
 import com.example.autoservice.service.CarOwnerService;
-import com.example.autoservice.service.CarService;
-import com.example.autoservice.service.OrderService;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
@@ -21,9 +20,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Collections;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest

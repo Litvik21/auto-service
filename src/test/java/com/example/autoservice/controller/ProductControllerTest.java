@@ -1,5 +1,6 @@
 package com.example.autoservice.controller;
 
+import java.math.BigDecimal;
 import com.example.autoservice.dto.product.ProductRequestDto;
 import com.example.autoservice.model.Product;
 import com.example.autoservice.service.ProductService;
@@ -16,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import java.math.BigDecimal;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest

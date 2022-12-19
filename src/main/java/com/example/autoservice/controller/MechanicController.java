@@ -2,6 +2,8 @@ package com.example.autoservice.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.example.autoservice.dto.mechanic.MechanicRequestDto;
 import com.example.autoservice.dto.mechanic.MechanicResponseDto;
 import com.example.autoservice.dto.order.OrderResponseDto;
@@ -69,5 +71,13 @@ public class MechanicController {
             Long id) {
 
         return mechanicService.getSalary(id);
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get list of mechanics")
+    public List<MechanicResponseDto> getAll() {
+        return mechanicService.getAll().stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }

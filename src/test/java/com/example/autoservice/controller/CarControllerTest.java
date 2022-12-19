@@ -1,20 +1,17 @@
 package com.example.autoservice.controller;
 
+import java.util.Collections;
 import com.example.autoservice.dto.car.CarRequestDto;
 import com.example.autoservice.model.Car;
 import com.example.autoservice.model.CarOwner;
-import com.example.autoservice.repository.CarRepository;
 import com.example.autoservice.service.CarOwnerService;
 import com.example.autoservice.service.CarService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +19,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Collections;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest

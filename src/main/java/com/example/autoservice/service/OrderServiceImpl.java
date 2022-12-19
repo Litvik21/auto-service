@@ -54,6 +54,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getAll() {
+        return orderRepository.findAll();
+    }
+
+    @Override
     public BigDecimal getPrice(Long id) {
         Order order = getById(id);
         checkTypeOfTaskOnDiagnostic(order);

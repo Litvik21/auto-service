@@ -62,4 +62,12 @@ public class CarOwnerController {
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping
+    @ApiOperation(value = "Get list of car owners")
+    public List<CarOwnerResponseDto> getAll() {
+        return ownerService.getAll().stream()
+                .map(mapper::toDto)
+                .toList();
+    }
 }

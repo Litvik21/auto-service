@@ -1,6 +1,8 @@
 package com.example.autoservice.service;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import com.example.autoservice.model.Order;
 import com.example.autoservice.model.Product;
 
@@ -16,4 +18,6 @@ public interface OrderService {
     BigDecimal getPrice(Long id);
 
     Order getById(Long id);
+
+    List<Order> getAll();
 }

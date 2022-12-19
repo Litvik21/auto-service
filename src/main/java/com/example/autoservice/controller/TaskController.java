@@ -7,12 +7,9 @@ import com.example.autoservice.model.Task;
 import com.example.autoservice.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
@@ -54,5 +51,13 @@ public class TaskController {
 
         return mapper.toDto(taskService.updateStatus(id,
                 Task.PaymentStatus.valueOf(status)));
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get list of tasks")
+    public List<TaskResponseDto> getAll() {
+        return taskService.getAll().stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }

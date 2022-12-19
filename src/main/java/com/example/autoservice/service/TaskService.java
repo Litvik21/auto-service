@@ -17,4 +17,6 @@ public interface TaskService {
     List<Task> findTasksByMechanicId(Long mechanicId);
 
     Optional<Task> findTaskByType(Task.TypeOfTask type);
+
+    List<Task> getAll();
 }

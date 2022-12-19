@@ -52,6 +52,11 @@ public class MechanicServiceImpl implements MechanicService {
                 .orElseThrow(() -> new RuntimeException("Can't find master by id:" + id));
     }
 
+    @Override
+    public List<Mechanic> getAll() {
+        return mechanicRepository.findAll();
+    }
+
     private void updateStatusOfJobMaster(List<Task> tasks) {
         for (Task task : tasks) {
             taskService.updateStatus(task.getId(), Task.PaymentStatus.PAID);

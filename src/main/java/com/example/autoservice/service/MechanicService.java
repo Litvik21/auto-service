@@ -15,4 +15,6 @@ public interface MechanicService {
     BigDecimal getSalary(Long masterId);
 
     Mechanic getById(Long id);
+
+    List<Mechanic> getAll();
 }
