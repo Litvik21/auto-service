@@ -1,5 +1,6 @@
 package com.example.autoservice.controller;
 
+import java.util.List;
 import com.example.autoservice.dto.task.TaskRequestDto;
 import com.example.autoservice.dto.task.TaskResponseDto;
 import com.example.autoservice.dto.mapper.TaskMapperDto;
@@ -8,8 +9,6 @@ import com.example.autoservice.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")

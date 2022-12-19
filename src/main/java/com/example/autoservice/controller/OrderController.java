@@ -2,7 +2,6 @@ package com.example.autoservice.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import com.example.autoservice.dto.order.OrderRequestDto;
 import com.example.autoservice.dto.order.OrderResponseDto;
 import com.example.autoservice.dto.mapper.OrderMapper;
@@ -14,7 +13,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/orders", method = {RequestMethod.GET})
+@RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;

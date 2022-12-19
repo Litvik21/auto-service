@@ -1,5 +1,6 @@
 package com.example.autoservice.controller;
 
+import java.util.List;
 import com.example.autoservice.dto.product.ProductRequestDto;
 import com.example.autoservice.dto.product.ProductResponseDto;
 import com.example.autoservice.dto.mapper.ProductMapper;
@@ -8,9 +9,6 @@ import com.example.autoservice.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping( "/products")

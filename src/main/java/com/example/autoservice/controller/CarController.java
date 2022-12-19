@@ -1,5 +1,6 @@
 package com.example.autoservice.controller;
 
+import java.util.List;
 import com.example.autoservice.dto.car.CarRequestDto;
 import com.example.autoservice.dto.car.CarResponseDto;
 import com.example.autoservice.dto.mapper.CarMapper;
@@ -8,9 +9,6 @@ import com.example.autoservice.service.CarService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("cars")
